@@ -5,6 +5,27 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/devops-image:v1']
 
+# Step 3: Set up kubectl with GKE credentials
+
+ - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'container'
+      - 'clusters'
+      - 'get-credentials'
+      - 'devops-cluster'  
+      - '--zone'
+      - 'us-central1-a'  
+
+  # Step 4: Deploy to Kubernetes using kubectl
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      - 'apply'
+      - '-f'
+      - 'k8s-deployment.yaml'  
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=devops-cluster'
+
 images:
   - 'gcr.io/$PROJECT_ID/devops-image:v1'
 
