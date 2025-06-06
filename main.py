@@ -1,6 +1,9 @@
 from flask import Flask, render_template
+import logging
 
-logging.basicConfig(level=logging.pp = Flask(__name__)
+logging.basicConfig(level=logging.INFO)
+
+app = Flask(__name__)
 
 @app.route("/")
 def home():
