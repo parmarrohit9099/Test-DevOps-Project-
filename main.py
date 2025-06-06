@@ -9,7 +9,7 @@ app = Flask(__name__)
 def home():
     logging.info("Home page accessed from IP: %s", request.remote_addr)
     return render_template("index.html")
-    model = {"title": "Hello! Welcome to the GCP Deployed App"}
+    model = {"title": "Hello! Welcome to the GCP Deployedd App"}
     return render_template("index.html", model=model)
 
 if __name__ == "__main__":
